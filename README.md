@@ -1,5 +1,11 @@
 # Dance To The Beat — Website Project
 
+*This folder describes the architecture, development workflow, deployment strategy, scalability approach, and future roadmap for the Dance To The Beat website.*
+
+<img width="2752" height="1536" alt="Digital_Platform_Engineering_Roadmap" src="https://github.com/user-attachments/assets/24066c0e-eeb2-4e36-9a49-413ee6f63d52" />
+
+## Executive Summary
+
 Premium marketing/lead-generation website for **Dance To The Beat**, an Indian semi-classical dance academy led by Shatabdi Banerjee ("Move to Express, Dance to Inspire"). Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Framer Motion, React Hook Form, and Zod; deployed on Netlify.
 
 This repository is organized as a phase-based documentation set (00–07) followed by the actual application (08-source-code). Each numbered folder is a complete, self-contained deliverable — later folders depend on earlier ones as source of truth and do not redefine decisions already made upstream.
@@ -38,7 +44,7 @@ Increase student admissions (offline and online) by building trust through the t
 - **Netlify** — via `@netlify/plugin-nextjs`, configured through `netlify.toml` (base directory `08-source-code`)
 - **GitHub** — version control, connected to Netlify for CI deploys
 
-Not in the stack: no CMS, no analytics, no backend/database — the site is fully static/server-rendered with no persistence layer, and form submissions are currently client-side only (no email/CRM integration wired up yet).
+Not in the stack: no CMS, no analytics, no backend/database — the site is fully static/server-rendered with no persistence layer. Admission Enquiry and Contact forms submit directly to **Salesforce Web-to-Lead** (a plain browser form POST to Salesforce's hosted endpoint, not a custom backend or REST API) — this is the site's only integration with an external system.
 
 *Verified directly against `08-source-code/package.json`, `netlify.toml`, and the installed `lucide-react` package.*
 
@@ -132,7 +138,7 @@ Dance-Academy-Website/
 | `02_Information_Architecture` | Site structure, navigation, user flows, per-page content hierarchy, and the empty-state rules governing all TBD content | Complete |
 | `03_Wireframes` | ASCII wireframes for all 6 primary pages plus responsive behavior rules | Complete |
 | `04_UI_Components` | Behavioral/accessibility/animation spec for the surviving reusable UI components | Partial — 4 spec files removed (see note above) |
-| `05_Assets` | Media files — logo (received), loading screen art (received), teacher photos, gallery, videos, testimonials, certificates, icons, backgrounds | Mostly TBD — only Logo and Loading Screen assets received |
+| `05_Assets` | Media files — logo, loading screen art, teacher photos, gallery (images/videos/shorts), achievements/certificates, icons, backgrounds | Mostly received — testimonials and event posters remain TBD |
 | `06_Development` | Technical architecture docs | Partial — only `performance-strategy.md` survives |
 | `07_Deployment` | Netlify deployment guide (setup + incident log), pre-launch checklist, release notes | Complete — rewritten to reflect the actual Netlify setup |
 | `08-source-code` | The actual Next.js application | Built and live — Next.js 16, TypeScript, Tailwind v4, deployed via Netlify |
@@ -145,8 +151,8 @@ Dance-Academy-Website/
 
 ## Known Open Items
 
-- **Form submissions have no backend.** Admission Enquiry and Contact forms validate and show a confirmation panel, but nothing is actually sent or stored — no email/CRM integration is wired up yet. This is the most significant gap before real launch; see `07_Deployment/deployment-checklist.md`.
-- Teacher photos, gallery images, videos, testimonials, awards/certificates, event posters — all TBD (`project-spec.json → assets`)
+- **Testimonials remain TBD.** The Testimonials Carousel stays hidden (per the no-fabrication empty-state rule) until real quotes are supplied — the only major asset category still empty.
+- Teacher photos, gallery images/videos/shorts, and achievements/certificates are populated; event posters remain TBD.
 - Domain registrar not yet selected; DNS not yet pointed to Netlify
 - Admission Enquiry confirmation panel response-time (SLA) copy not yet confirmed (originally flagged in `05_Content/admission-copy.md`, since removed — implemented without a specific SLA claim, per the no-fabrication rule)
 - Email/newsletter provider not yet selected — deferred by decision, not blocking
